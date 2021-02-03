@@ -24,6 +24,7 @@ html{
     min-height: 100%;
     position: relative;
     height: 100%;
+    font-size: 1vw;
 }
 
 body {
@@ -43,8 +44,6 @@ body {
 .fa-angle-down {
     color: #555555;
     font-size: 4rem;
-    position: absolute;
-  top: 200px;
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
     -webkit-transition: all .2s ease-in;
