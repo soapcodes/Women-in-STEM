@@ -7,6 +7,7 @@
 
     <script type="text/javascript" src="scripts/d3.min.js"></script>
     <script src="scripts/graph.js" type='text/javascript'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.6/SmoothScroll.min.js"></script>
@@ -32,14 +33,15 @@
         <h1 class="ml13">Explorations of</h1>
         <h1 class="ml16">Female Participation</h1>
         <h1 class="ml12">in STEM Education</h1>
-        <a href="#section-2"><i class="fas fa-angle-down bounce"></i></a>
+        <a href="#section-1"><i class="fas fa-angle-down bounce"></i></a>
         
     </div>
-    
-    <div class="header" id="myheader"></div>
-
+    <section id="section-1"></section>
+    <div class="header" id="myheader"><nav>
+        <a href="#section-1"><i class="fab fa-readme"></i><p>Readme</p></a>
+        <a href="#section-2"><i class="fas fa-chart-bar"></i> Visualization</a>
+        <a href="#section-3"><i class="fab fa-canadian-maple-leaf"></i> Data Source</a></nav></div>
         <div class="pre">
-    
                 <div class="wrapper" id="intro-box">
                     <div class="text-box">
                     <h2>What?</h2>
@@ -55,29 +57,34 @@
                         <li>Astronomer</li>
                     </ul>
                     
-                    <img src="./assets/images/engineer3.jpg">
-                        
-                    As technology continues to evolve and expand at lightning speed, it is no wonder that candidates with a STEM background are becoming more and more desired by employers. With healthcare and high-tech jobs on the rise, the STEM field allows student an increased chance of getting hired after graduation and a higher salary.<section id="section-1"></section>
+                    <img src="./assets/images/engineer3.jpg">    
+                    As technology continues to evolve and expand at lightning speed, it is no wonder that candidates with a STEM background are becoming more and more desired by employers. With healthcare and high-tech jobs on the rise, the STEM field allows student an increased chance of getting hired after graduation and a higher salary.
                     </div>
                 </div>
-                
-                <div class="wrapper" id="intro-wrapper">
+                <div class="wrapper" id="intro-box">
                     <div class="text-box">
-                    <section id="section-2"></section><h2>Why?</h2>
-                   The lack of female representation in STEM has garnered a considerable amount of scrutiny in Canada. To understand why, we have to set our sights on the past.
-                </div>
+                    <h2>Why?</h2>
+                   The lack of female representation in STEM has garnered a considerable amount of scrutiny in Canada. Although the nation has made significant strides towards the commitment to gender equality, women continue to be underrepresented in STEM academia. To understand why, we have to set our sights on the past. Using data from Canada's 2016 census, we will examine STEM degree and certificate holders by province and highest level of education attained, to observe in which groups the gender gap persist the most and the least.
+                    </div> 
+            </div>
+            <div class="wrapper" id="intro-box">
+                    <div class="text-box">
+                    <section id="section-2"></section><h2>How?</h2>
+                  Statistics Canada conducts the census every five years via paper or online questionnaire. The data used for this visualization is a subset that consists of STEM graduates and is organized by highest education level achieved, age group, and province. 
+                    </div>
                 
-                <p></p>
-                <div class="box" id="button-box">
-      
-                </div>
+                
 
             
             </div>
 
         </div>
     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <div class="box" id="button-box">
+      
+                </div>
+    
 <script src="js/script.js" type='text/javascript'></script>
     
 </body>

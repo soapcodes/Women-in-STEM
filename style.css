@@ -9,9 +9,9 @@
     width: 2px;
     background-color: #ffffff;
     border-radius: 1000px;
-    border: 4px solid #555555;
-    border-top: 7px solid #555555;
-    border-bottom: 7px solid #555555;
+    border: 4px solid #FDB7BC;
+    border-top: 7px solid #FDB7BC;
+    border-bottom: 7px solid #FDB7BC;
 }
 
 @font-face { font-family: "kaori"; src: url('https://dl.dropboxusercontent.com/s/gifpgk1qx565q7z/KaoriGel.ttf'); }
@@ -139,7 +139,7 @@ h1 {
 }
 
 h2 {
-	font-size: 2rem;
+	font-size: 1.8rem;
 	font-weight: 300;
     color: #555555;
     border-bottom: 1px solid #FED7DA;
@@ -182,7 +182,7 @@ u{
 
 .pre {
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .pre img {
@@ -212,6 +212,66 @@ u{
     background-color: #FED7DA;
 }
 
+nav {
+    display: inline-block;
+    justify-content: space-between;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    
+}
+
+nav a{
+    display:inline-block;
+    padding: 0em 0.3em; 
+    font-size: 1.5em;
+    color: #623A03;
+     -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+nav a:hover{
+  color: white;
+    text-decoration: none;
+}
+
+nav a p{
+  display: none;
+}
+
+nav a:hover p{
+  display: block;
+  color: white;
+  opacity: 0.0;
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
 .sticky {
   position: fixed;
   top: 0;
@@ -223,12 +283,16 @@ u{
     padding: 10px;  
     width: 75%;
     margin: auto;
-    border:1px solid #555555;
-    box-shadow:calc((400px + (25px * 2)) * 0.025) calc((400px + (25px * 2)) * 0.025) #BABABA;
+    border:1px solid #412702;
+    box-shadow:calc((400px + (25px * 2)) * 0.025) calc((400px + (25px * 2)) * 0.025) #623A03;
 }
 
 .text-box {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+}
+
+.data-box {
+    
 }
 
 #intro-box {

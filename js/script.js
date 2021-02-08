@@ -89,3 +89,14 @@ $('a[href*="#"]')
             }
         }
     });
+
+(function($){
+$(document).ready(function(){
+$("a[title]").style_my_tooltips({
+tip_follows_cursor:true,
+tip_delay_time:100,
+tip_fade_speed:100,
+attribute:"title"
+});
+});
+})(jQuery);
