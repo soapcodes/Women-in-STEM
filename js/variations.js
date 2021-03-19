@@ -140,7 +140,7 @@ var svg = d3.select("#barGraph")
         
         var color = d3.scaleOrdinal()
             .domain(values)
-            .range(colorsFM)
+            .range(['#7AD1FF', '#FF7AD1'])
 
         //Stack per subgroup
         var stackedData = d3.stack()
@@ -182,7 +182,7 @@ var svg = d3.select("#barGraph")
           .attr("height", function(d) { return y(d[0]) - y(d[1]); })
           .delay(function(d,i){console.log(i) ; return(i*100)})
         
-        var colorLgnd = colorsFM;
+        var colorLgnd = ['#7AD1FF', '#FF7AD1'];
     
 /***************************************************************************************
 *   This program contains a code snippet from: 
@@ -651,23 +651,6 @@ var svg = d3.select("#barGraph3")
     })
 }
 
-  function dragstarted() {
-    d3.select(this).raise();
-    g.attr("cursor", "grabbing");
-  }
-
-  function dragged(event, d) {
-    d3.select(this).attr("cx", d.x = event.x).attr("cy", d.y = event.y);
-  }
-
-  function dragended() {
-    g.attr("cursor", "grab");
-  }
-
-  function zoomed({transform}) {
-    g.attr("transform", transform);
-  }
-
 function loadVis4(xVal, yVal) {
     
     eraseSVG(4);
@@ -855,11 +838,6 @@ var svg = d3.select("#barGraph4")
               case 1: return "Male";
             }
           });
-    
-  svg.call(d3.zoom()
-      .extent([[0, 0], [width, height]])
-      .scaleExtent([1, 8])
-      .on("zoom", zoomed));
 
 
 })
