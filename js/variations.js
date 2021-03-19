@@ -1,5 +1,5 @@
 var WIDTH = 800
-var HEIGHT = 450
+var HEIGHT = 550
 var TOP = 20
 var RIGHT = 90
 var BOTTOM = 180
@@ -182,7 +182,7 @@ var svg = d3.select("#barGraph")
           .attr("height", function(d) { return y(d[0]) - y(d[1]); })
           .delay(function(d,i){console.log(i) ; return(i*100)})
         
-                var colorLgnd = colorsFM;
+        var colorLgnd = colorsFM;
     
 /***************************************************************************************
 *   This program contains a code snippet from: 
@@ -650,10 +650,38 @@ var svg = d3.select("#barGraph3")
 
     })
 }
-/**
+
+  function dragstarted() {
+    d3.select(this).raise();
+    g.attr("cursor", "grabbing");
+  }
+
+  function dragged(event, d) {
+    d3.select(this).attr("cx", d.x = event.x).attr("cy", d.y = event.y);
+  }
+
+  function dragended() {
+    g.attr("cursor", "grab");
+  }
+
+  function zoomed({transform}) {
+    g.attr("transform", transform);
+  }
+
 function loadVis4(xVal, yVal) {
     
     eraseSVG(4);
+
+/***************************************************************************************
+*   This program contains a code snippet from: 
+*
+*    Title: Most basic grouped barplot in d3.js
+*    Author: Holtz Yan
+*    Date: 03/21/2021
+*    Code version: 1.0
+*    Availability: https://www.d3-graph-gallery.com/graph/barplot_grouped_basicWide.html
+*
+***************************************************************************************/
     
     // set the dimensions and margins of the graph
 var margin = {top: TOP, right: RIGHT, bottom: BOTTOM, left: LEFT},
@@ -668,7 +696,7 @@ var svg = d3.select("#barGraph4")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-    
+
     var data_names = ["data/province.csv", "data/education.csv", "data/age.csv"]
     
     var data_name = data_names[xVal-1]
@@ -676,81 +704,167 @@ var svg = d3.select("#barGraph4")
 
     // Parse the Data
     d3.csv(data_name, function(data) {
-
-        // format the data
-      data.forEach(function(d) { 
-      });
-
-      // List of subgroups = header of the csv files
-      var group_grad = [data.columns[13], data.columns[14], data.columns[15]]
-      var total_grad = [data.columns[16]]
-      
-      var values = total_grad
-                        
-      if(yVal == 5)
-        values = group_grad
-
-      // List of groups = species here = value of the first column called group -> I show them on the X axis
-      var groups = d3.map(data, function(d){return(d.key)}).keys()
-
-      // Add X axis
-      var x = d3.scaleBand()
-          .domain(groups)
-          .range([0, width])
-          .padding([0.2])
-      svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).tickSizeOuter(0))
-        .selectAll("text")  
-            .style("text-anchor", "end")
-            .style("font", "0.9em 'Work Sans'")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-35)");     
         
-      // Add Y axis
-      var y = d3.scaleLinear()
-        .domain([0, 1.2])
-        .range([ height, 0 ]).nice();
-      svg.append("g")
-        .call(d3.axisLeft(y));
-        
-        var color = d3.scaleOrdinal()
-            .domain(values)
-            .range(['#D9BCFF','#BCFFD9','pink'])
+  data.forEach(function(d) { 
+    d.m_total = +d.m_total;
+    d.m_science = +d.m_science;
+    d.f_science = +d.f_science;
+    d.m_eng = +d.m_eng;
+    d.m_math = +d.m_math;
+  });
 
-        //stack the data? --> stack per subgroup
-        var stackedData = d3.stack()
-        .keys(values)
-        (data)
+  // List of subgroups = header of the csv files
+  var total_grad = [data.columns[8], data.columns[4]]
+  var science_grad = [data.columns[5], data.columns[1]]
+  var eng_grad = [data.columns[6], data.columns[2]]
+  var math_grad = [data.columns[7], data.columns[3]]
+  
+  var subgroups = total_grad
+  switch(yVal) {
+  case 2:
+    subgroups = science_grad
+    break;
+  case 3:
+    subgroups = eng_grad
+    break;
+  case 4:
+    subgroups = math_grad
+    break;
+  case 5:
+    subgroups = deet_grad;
+    break;          
+  default:
+    subgroups = total_grad;
+}
+
+  // List of groups = species here = value of the first column called group
+  var groups = d3.map(data, function(d){return(d.key)}).keys()
+
+  // Add X axis
+  var x = d3.scaleBand()
+      .domain(groups)
+      .range([0, width])
+      .padding([0.2])
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).tickSize(0))
+    .selectAll("text")  
+        .style("text-anchor", "end")
+        .style("font", "0.9em 'Work Sans'")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-35)"); 
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+        .domain([0, d3.max(data, function(d) {
+            switch(yVal) {
+          case 2:
+            return d.f_science
+            break;
+          case 3:
+            return d.m_eng
+            break;
+          case 4:
+            return d.m_math
+            break;
+          default:
+            return d.m_total
+        }
+        })])
+    .range([ height, 0 ]).nice();
+  svg.append("g")
+    .call(d3.axisLeft(y));
         
-      // Show the bars
-      svg.append("g")
-        .selectAll("g")
-        // Enter in the stack data = loop key per key = group per group
-        .data(stackedData)
-        .enter().append("g")
-          .attr("fill", function(d) { return color(d.key); })
-          .selectAll("rect")
-          // enter a second time = loop subgroup per subgroup to add all rectangles
-          .data(function(d) { return d; })
-          .enter().append("rect")
-            .attr("x", function(d) { return x(d.data.key); })
-            .attr("y", function(d) { return y(0); })
-            .attr("height", function(d) { return y(d[0]) - y(0); })
-            .attr("width",x.bandwidth())
+    // Add titles to axes
+    svg.append("text")
+        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        .attr("transform", "translate("+ (-PADDING/2) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+        .text("Graduates");
+
+  // Another scale for subgroup position?
+  var xSubgroup = d3.scaleBand()
+    .domain(subgroups.reverse())
+    .range([0, x.bandwidth()])
+    .padding([0.05])
+
+  // color palette = one color per subgroup
+  var color = d3.scaleOrdinal()
+    .domain(subgroups.reverse())
+    .range(colorsFM)
+
+  // Show the bars
+  svg.append("g")
+    .selectAll("g")
+    // Enter in data = loop group per group
+    .data(data)
+    .enter()
+    .append("g")
+      .attr("transform", function(d) { return "translate(" + x(d.key) + ",0)"; })
+    .selectAll("rect")
+    .data(function(d) { return subgroups.map(function(key) { return {key: key, value: d[key]}; }); })
+    .enter().append("rect")
+      .attr("x", function(d) { return xSubgroup(d.key); })
+      .attr("y", function(d) { return y(0); })
+      .attr("width", xSubgroup.bandwidth())
+      .attr("height", function(d) { return height - y(0); })
+      .attr("fill", function(d) { return color(d.key); });
         
-        // Animation
-        svg.selectAll("rect")
-          .transition()
-          .duration(800)
-          .attr("y", function(d) { return y(d[1]); })
-          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-          .delay(function(d,i){console.log(i) ; return(i*100)})
-    })
+    // Animation
+    svg.selectAll("rect")
+      .transition()
+      .duration(800)
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .delay(function(d,i){console.log(i) ; return(i*100)})
+      .attr("fill", function(d) { return color(d.key); });
+        
+/***************************************************************************************
+*   This program contains a code snippet from: 
+*
+*    Title: Stacked bar chart with tooltips
+*    Author: Michael Stanaland
+*    Date: 03/21/2021
+*    Code version: 1.0
+*    Availability: http://bl.ocks.org/mstanaland/6100713
+*
+***************************************************************************************/
+        var colorLgnd = colorsFM
+        
+        // Draw legend
+        var legend = svg.selectAll(".legend")
+          .data(colorLgnd)
+          .enter().append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(30," + i * 19 + ")"; });
+
+        legend.append("rect")
+          .attr("x", width - 18)
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", function(d, i) {return colorLgnd.slice().reverse()[i];});
+
+        legend.append("text")
+          .attr("x", width + 5)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "start")
+          .text(function(d, i) { 
+            switch (i) {
+              case 0: return "Female";
+              case 1: return "Male";
+            }
+          });
+    
+  svg.call(d3.zoom()
+      .extent([[0, 0], [width, height]])
+      .scaleExtent([1, 8])
+      .on("zoom", zoomed));
+
+
+})
 
 }
-**/
 
 function checkSelected(graphNum){
     
@@ -838,4 +952,4 @@ function checkSelected(graphNum){
 loadVis1(1,1);
 loadVis2(1,1);
 loadVis3(1,1);
-//loadVis4(1,1);
+loadVis4(1,1);

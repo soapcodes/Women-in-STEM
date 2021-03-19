@@ -77,7 +77,7 @@
             </div>
             
         <div class="wrapper" id="graph-box">
-        <section id="section-2"></section><h2>Visualization Variation 1</h2>
+        <section id="section-2"></section><h2>Original Visualization</h2>
             <h3>Amount of STEM Graduates by Gender (2016)</h3>
         <div id="valueButton">
             <input type="radio" id="total" value="total" name="stemGroup" onclick="checkSelected(1)" checked="checked">All Graduates<br>
@@ -94,6 +94,23 @@
         </select>
         </div>
             
+        <div class="wrapper" id="graph-box">
+        <h2>Visualization Variation 1</h2>
+        <h3>Amount of STEM Graduates by Gender (2016)</h3>
+        <div id="valueButton4">
+            <input type="radio" id="total" value="total" name="stemGroup4" onclick="checkSelected(4)" checked>All Graduates<br>
+            <input type="radio" id="sci" value="sci" name="stemGroup4" onclick="checkSelected(4)">Science and Science Technology Grads<br>
+            <input type="radio" id="eng" value="eng" name="stemGroup4" onclick="checkSelected(4)">Engineering and Engineering Technology Grads<br>
+            <input type="radio" id="math" value="math" name="stemGroup4" onclick="checkSelected(4)">Math and Computer and Information Grads<br>
+        </div>
+        <div id="barGraph4" align="left">
+        </div>
+      <select id="subsetButton4" onmousedown="this.value='';" onchange="checkSelected(4);">
+                <option value="prov" >Province/Territory</option>
+                <option value="edu">Educational Attainment</option>
+                <option value="age">Age Group</option>  
+        </select>
+        </div>
             
         <div class="wrapper" id="graph-box">
         <h2>Visualization Variation 2</h2>
@@ -132,23 +149,6 @@
                 <option value="age">Age Group</option>  
         </select>
         </div>
-            <!--
-        <div class="wrapper" id="graph-box">
-        <h2>Visualization Variation 3b</h2>
-        <div id="valueButton4">
-            <input type="radio" id="total" value="total" name="stemGroup4" onclick="checkSelected(4)" checked>All Graduates<br>
-            <input type="radio" id="deet" value="deet" name="stemGroup4" onclick="checkSelected(4)">Stacked by Group<br>
-        </div>
-        <select id="subsetButton4" onmousedown="this.value='';" onchange="checkSelected(4);">
-                <option value="prov" >Province/Territory</option>
-                <option value="edu">Educational Attainment</option>
-                <option value="age">Age Group</option>  
-        </select>
-        <div id="barGraph4" align="left">
-        </div>
-
-        </div>
-    -->
 
     </div>
     
