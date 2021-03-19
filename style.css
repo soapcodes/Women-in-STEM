@@ -9,9 +9,9 @@
     width: 2px;
     background-color: #ffffff;
     border-radius: 1000px;
-    border: 4px solid #FDB7BC;
-    border-top: 7px solid #FDB7BC;
-    border-bottom: 7px solid #FDB7BC;
+    border: 4px solid #623A03;
+    border-top: 7px solid #623A03;
+    border-bottom: 7px solid #623A03;
 }
 
 @font-face { font-family: "kaori"; src: url('https://dl.dropboxusercontent.com/s/gifpgk1qx565q7z/KaoriGel.ttf'); }
@@ -38,11 +38,10 @@ body {
     font-weight: 400;
     height: 100%;
 
-
 }
 
 .fa-angle-down {
-    color: #555555;
+    color: #623A03;
     font-size: 4rem;
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -99,7 +98,7 @@ body {
 }
 
 .ml16 {
-  color: #555555;
+  color: #623A03;
   font-family: 'cafe brewery', sans-serif;
   text-transform: uppercase;
   font-weight: 500;
@@ -146,9 +145,9 @@ h2 {
 }
 
 h3 {
-	padding-top: 36px;
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 	font-weight: 500;
+    font-family: 'kaori', sans-serif;
 }
 
 p {
@@ -182,7 +181,6 @@ u{
 
 .pre {
     margin-top: 20px;
-    margin-bottom: 30px;
 }
 
 .pre img {
@@ -291,7 +289,10 @@ nav a:hover p{
     margin-bottom: 15px;
 }
 
-.data-box {
+#graph-box {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    height: auto;
     
 }
 
@@ -310,7 +311,7 @@ nav a:hover p{
 }
 
 svg {
-	background: #FEEED7;
+	background: white;
 }
 
 .axis {
@@ -334,4 +335,10 @@ svg {
 	font-weight: 700;
 }
 
-
+.bar:hover {}
+.bar1 { fill: #f5f7f3; }
+.bar2 { fill: #ebefe7; }
+.bar3 { fill: #d7dfcf; }
+.bar4 { fill: #c3cfb7; }
+.bar5 { fill: #afbf9f; }
+.bar6 { fill: #9caf88; }
