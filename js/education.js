@@ -1,75 +1,97 @@
-// set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 130, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var width = 400, height = 350;
+var margin = {top: 90, right: 20, bottom: 30, left: 80};
 
-// append the svg object to the body of the page
-var svg = d3.select("#barGraph")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+//data
+var data = [ {"month":"JAN","patients":120}, {"month":"FEB","patients":50}, {"month":"MAR","patients":80}, {"month":"APR","patients":20}, {"month":"MAY","patients":100}, {"month":"JUN","patients":350}];
 
-// Parse the Data
-d3.csv("data/education.csv", function(data) {
+//x and y Scales
+var xScale = d3.scale.ordinal()
+.rangeRoundBands([0, width], .1);
+
+var yScale = d3.scale.linear()
+.range([height, 0]);
+
+xScale.domain(data.map(function(d) { return d.month; }));
+yScale.domain([0, d3.max(data, function(d) { return d.patients; })]);
+
+//x and y Axes
+var xAxis = d3.svg.axis()
+.scale(xScale)
+.orient("bottom")
+.outerTickSize(0);
+
+var yAxis = d3.svg.axis()
+.scale(yScale)
+.orient("left");
+
+
+//create svg container
+var svg = d3.select('#barGraph4')
+.append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");        
+
+// Horizontal grid
+svg.append("g")         
+  .call(d3.svg.axis().scale(yScale)
+        .orient("left")
+        .tickSize(-(height + margin.top + margin.bottom - 70), 0, 0)
+        .tickFormat("")
+       );
+
+//create bars
+var bars = svg.selectAll(".bar")
+.data(data)
+.enter()
+.append("g");
+
+bars.append("rect")
+  .attr("x", function(d) { return xScale(d.month); })
+  .attr("width", xScale.rangeBand())
+  .attr("y", function(d) { return yScale(d.patients); })
+  .attr("height", function(d) { return height - yScale(d.patients); })
+  .on("click", function(d) {
+		var txt = d3.select(this.nextSibling);
     
-    // format the data
-  data.forEach(function(d) { 
-    d.total = +d.total;
-  });
+		if(txt.attr('opacity') === '0') {
+      txt.attr('opacity', '1');
+    } else {
+    	txt.attr('opacity', '0');
+    }
+	});
+  
+bars.append("text")
+  .attr("x", function(d) { return xScale(d.month); })
+  .attr("y", function(d) { return yScale(d.patients) + 2 ; })
+  .attr("dy", "1em")
+  .attr("text-anchor", "middle")
+  .attr("font-size", "16px")
+  .attr("fill", "orange")
+  .attr("opacity", '0')
+  .attr("transform", function(d) { return "translate(20, -20)"; })
+  .text(function(d) { return "hi"; });
 
-  // List of subgroups = header of the csv files = soil condition here
-  var subgroups = [data.columns[8], data.columns[4]]
 
-  // List of groups = species here = value of the first column called group -> I show them on the X axis
-  var groups = d3.map(data, function(d){return(d.edu)}).keys()
 
-  // Add X axis
-  var x = d3.scaleBand()
-      .domain(groups)
-      .range([0, width])
-      .padding([0.2])
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).tickSizeOuter(0))
-    .selectAll("text")  
-        .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
-        .attr("transform", "rotate(-65)");
+//drawing the x axis on svg
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
 
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) { return d.total; })])
-    .range([ height, 0 ]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
+//drawing the y axis on svg
+svg.append("g")
+  .call(yAxis)
+  .append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 6)
+  .attr("dy", ".71em")
+  .style("text-anchor", "end");
 
-  // color palette = one color per subgroup
-  var color = d3.scaleOrdinal()
-    .domain(subgroups)
-    .range(['#D9BCFF','#BCFFD9'])
+svg.selectAll(".tick")
+  .filter(function (d) { return d === 0;     
+                       }).remove();
 
-  //stack the data? --> stack per subgroup
-  var stackedData = d3.stack()
-    .keys(subgroups)
-    (data)
-
-  // Show the bars
-  svg.append("g")
-    .selectAll("g")
-    // Enter in the stack data = loop key per key = group per group
-    .data(stackedData)
-    .enter().append("g")
-      .attr("fill", function(d) { return color(d.key); })
-      .selectAll("rect")
-      // enter a second time = loop subgroup per subgroup to add all rectangles
-      .data(function(d) { return d; })
-      .enter().append("rect")
-        .attr("x", function(d) { return x(d.data.edu); })
-        .attr("y", function(d) { return y(d[1]); })
-        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-        .attr("width",x.bandwidth())
-})
+    
+    

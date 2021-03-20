@@ -354,7 +354,20 @@ var svg = d3.select("#barGraph2")
             .attr("height", function(d) { return y(d[0]) - y(0); })
             .attr("width",x.bandwidth())
             .attr("style", "outline: 0.09em solid white;")
-        
+            .on("mouseover", function() { tooltip.style("display", null); })
+            .on("mouseout", function() { tooltip.style("display", "none"); })
+            .on("mousemove", function(d) {
+              console.log(d);
+              var xPosition = d3.mouse(this)[0] - 5;
+              var yPosition = d3.mouse(this)[1] - 5;
+              tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+              tooltip.select("text").text("hello");
+            });
+
+
+
+    
+
 /***************************************************************************************
 *   This program contains a code snippet from: 
 *
@@ -374,6 +387,7 @@ var svg = d3.select("#barGraph2")
           .attr("height", function(d) { return y(d[0]) - y(d[1]); })
           .delay(function(d,i){console.log(i) ; return(i*100)})
 
+        
         var colorLgnd = colorsFM
 /***************************************************************************************
 *   This program contains a code snippet from: 
@@ -410,9 +424,28 @@ var svg = d3.select("#barGraph2")
               case 1: return "Male";
             }
           });
-          
+        
     })
+    
+// Prep the tooltip bits, initial display is hidden
+  var tooltip = svg.append("g")
+    .attr("class", "tooltip")
+    .style("display", "none");
 
+  tooltip.append("mybar")
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("fill", "white")
+    .style("opacity", 0.5);
+
+  tooltip.append("text")
+    .attr("x", 30)
+    .attr("dy", "1.2em")
+    .style("text-anchor", "middle")
+    .attr("font-size", "12px")
+    .attr("font-weight", "bold");
+
+    
 }
 
 function loadVis3(xVal, yVal) {
@@ -445,7 +478,7 @@ var svg = d3.select("#barGraph3")
         d.fshare_total = +d.fshare_total;
         d.fshare_science = +d.fshare_science;
         d.fshare_eng = +d.fshare_eng;
-        d.fshare_eng = +d.fshare_math;
+        d.fshare_math = +d.fshare_math;
       });
 
     // X axis
@@ -483,7 +516,8 @@ var svg = d3.select("#barGraph3")
         .attr("width", x.bandwidth())
         // no bar at the beginning thus:
         .attr("height", function(d) { return height - y(0); }) // always equal to 0
-        .attr("y", function(d) { return y(0); })
+        .attr("y", function(d) { return y(0); });
+           
 /***************************************************************************************
 *   This program contains a code snippet from: 
 *
@@ -596,8 +630,6 @@ var svg = d3.select("#barGraph3")
             break;
           case 3:
             return height - y(d.fshare_eng)
-            return height - y(d.fshare_eng)
-            return height - y(d.fshare_eng)
             break;
           case 4:
             return height - y(d.fshare_math)
@@ -606,8 +638,8 @@ var svg = d3.select("#barGraph3")
             return height - y(d.fshare_total)
         }
     })
-      .delay(function(d,i){console.log(i) ; return(i*100)})
         
+
         var colorLgnd = ['#ebefe7', '#d7dfcf', '#c3cfb7', '#afbf9f', '#9caf88']
 /***************************************************************************************
 *   This program contains a code snippet from: 
@@ -684,7 +716,6 @@ var svg = d3.select("#barGraph4")
     
     var data_name = data_names[xVal-1]
     
-
     // Parse the Data
     d3.csv(data_name, function(data) {
         

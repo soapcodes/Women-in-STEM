@@ -285,6 +285,14 @@ nav a:hover p{
     box-shadow:calc((400px + (25px * 2)) * 0.025) calc((400px + (25px * 2)) * 0.025) #623A03;
 }
 
+#flex {
+    display: flex;
+    flex: flex-shrink;
+    justify-content: center;
+    align-items: baseline;
+    
+}
+
 .text-box {
     margin-bottom: 15px;
 }
@@ -342,3 +350,4 @@ svg {
 .bar4 { fill: #c3cfb7; }
 .bar5 { fill: #afbf9f; }
 .bar6 { fill: #9caf88; }
+
