@@ -85,7 +85,8 @@ var svg = d3.select("#barGraph")
             .style("font", "0.9em 'Work Sans'")
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
-            .attr("transform", "rotate(-35)"); 
+            .attr("transform", "rotate(-35)");
+
         switch(yVal) {
           case 2:
             values = science_grad
