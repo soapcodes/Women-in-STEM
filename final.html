@@ -36,11 +36,13 @@
         <h3>STEM Female Graduation Rate (2016)</h3>
         <div id="flex">
             <div id="valueButton2">
+                <b>Selected STEM grouping:<br></b>
                 <input type="radio" id="total" value="total" name="stemGroup" onclick="checkSelected(false)" checked>All Graduates<br>
                 <input type="radio" id="sci" value="sci" name="stemGroup" onclick="checkSelected(false)">Science and Science Technology Grads<br>
                 <input type="radio" id="eng" value="eng" name="stemGroup" onclick="checkSelected(false)">Engineering and Engineering Technology Grads<br>
                 <input type="radio" id="math" value="math" name="stemGroup" onclick="checkSelected(false)">Math and Computer and Information Grads<br>
             </div>
+            <b>Selected category:&nbsp;&nbsp;<br></b>
             <select id="subsetButton" onmousedown="this.value='';" onchange="checkSelected(true);">
                 <option value="prov" >Province/Territory</option>
                 <option value="edu">Educational Attainment</option>
