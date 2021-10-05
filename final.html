@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    <script src="https://kit.fontawesome.com/d663473e0e.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="./assets/images/icon.gif">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<title>Explorations of Female Participation in STEM Education</title>
+
+<section id="section-1"></section>
+<div class="header" id="myheader"><nav>
+    <a href="./index.html"><i class="fas fa-arrow-left"></i> Go Back</a>
+</nav></div>
+<div class="pre">
+    <div class="wrapper" id="graph-box">
+        <h2>Final Visualization</h2>
+        <h3>STEM Female Graduation Rate (2016)</h3>
+        <div id="flex">
+            <div id="valueButton2">
+                <b>Selected STEM grouping:<br></b>
+                <input type="radio" id="total" value="total" name="stemGroup" onclick="checkSelected(false)" checked>All Graduates<br>
+                <input type="radio" id="sci" value="sci" name="stemGroup" onclick="checkSelected(false)">Science and Science Technology Grads<br>
+                <input type="radio" id="eng" value="eng" name="stemGroup" onclick="checkSelected(false)">Engineering and Engineering Technology Grads<br>
+                <input type="radio" id="math" value="math" name="stemGroup" onclick="checkSelected(false)">Math and Computer and Information Grads<br>
+            </div>
+            <b>Selected category:&nbsp;&nbsp;<br></b>
+            <select id="subsetButton" onmousedown="this.value='';" onchange="checkSelected(true);">
+                <option value="prov" >Province/Territory</option>
+                <option value="edu">Educational Attainment</option>
+                <option value="age">Age Group</option>
+            </select>
+        </div>
+        <div id="final" align="center">
+        </div>
+    </div>
+    <div class="wrapper" id="intro-box">
+        <div class="text-box">
+            <h2>Description</h2>
+            For the final implementation of my visualization, I managed to achieve all of what I had originally set out to do. I was able to round the edges of the bars, changed the colour scheme to something more eye-catching, and I altered the bar animation to my liking. In addition, I succeeded in implementing two types of interactivity for my visualization. It offers both a filtering tool and a mouseover event that accurately displays the value of a bar. A user could use these tools to, for example, determine which province has the highest percentage of female graduates and detect any outliers. They could also use these tools to investigate how age group affects the graduation rate for women in Canada by selecting “Age Group” from the drop-down menu. These implemented interactions can provide insights into how female graduation rates differs across STEM groups, provinces, educational attainment level, and more.
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script src="js/final.js" type='text/javascript'></script>
+
+
+</body>
+</html>
